@@ -59,10 +59,10 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 		super.onResume();
 		PreferenceManager pm = ((Application) getActivity().getApplication()).getPreferenceManager();
 		items.clear();
-		items.add(new TestsuiteItem(new WebsitesSuite(), pm, this));
-		items.add(new TestsuiteItem(new InstantMessagingSuite(), pm, this));
-		items.add(new TestsuiteItem(new MiddleBoxesSuite(), pm, this));
-		items.add(new TestsuiteItem(new PerformanceSuite(), pm, this));
+		items.add(new TestsuiteItem(new WebsitesSuite(), pm, getActivity(),this));
+		items.add(new TestsuiteItem(new InstantMessagingSuite(), pm, getActivity(), this));
+		items.add(new TestsuiteItem(new MiddleBoxesSuite(), pm, getActivity(), this));
+		items.add(new TestsuiteItem(new PerformanceSuite(), pm, getActivity(), this));
 		setLastTest();
 		adapter.notifyTypesChanged();
 	}
