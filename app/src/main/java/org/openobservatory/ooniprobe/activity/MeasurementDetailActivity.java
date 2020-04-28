@@ -74,6 +74,7 @@ public class MeasurementDetailActivity extends AbstractActivity implements Confi
         super.onCreate(savedInstanceState);
         measurement = SQLite.select().from(Measurement.class)
                 .where(Measurement_Table.id.eq(getIntent().getIntExtra(ID, 0))).querySingle();
+        System.out.println("ThisDebug MeasurementDetailActivity onCreate "+ measurement);
         assert measurement != null;
         measurement.result.load();
         setTheme(measurement.is_failed ?
@@ -188,6 +189,26 @@ public class MeasurementDetailActivity extends AbstractActivity implements Confi
             });
         }
         load();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        measurement = SQLite.select().from(Measurement.class)
+                .where(Measurement_Table.id.eq(getIntent().getIntExtra(ID, 0))).querySingle();
+        System.out.println("ThisDebug MeasurementDetailActivity onNewIntent "+ measurement);
+    }
+
+    @Override
+    public void onDestroy() {
+        System.out.println("ThisDebug MeasurementDetailActivity onDestroy");
+        super.onDestroy();
+    }
+
+    @Override
+    public void onPause() {
+        System.out.println("ThisDebug MeasurementDetailActivity onPause");
+        super.onPause();
     }
 
     private void runAsyncTask() {

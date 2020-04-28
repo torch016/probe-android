@@ -82,6 +82,7 @@ public class ResultDetailActivity extends AbstractActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         result = SQLite.select().from(Result.class)
                 .where(Result_Table.id.eq(getIntent().getIntExtra(ID, 0))).querySingle();
+        System.out.println("ThisDebug ResultDetailActivity onCreate "+ result);
         assert result != null;
         setTheme(result.getTestSuite().getThemeLight());
         setContentView(R.layout.activity_result_detail);
@@ -109,6 +110,7 @@ public class ResultDetailActivity extends AbstractActivity implements View.OnCli
     @Override
     protected void onResume() {
         super.onResume();
+        System.out.println("ThisDebug ResultDetailActivity onResume "+ result);
         load();
     }
 
@@ -176,6 +178,26 @@ public class ResultDetailActivity extends AbstractActivity implements View.OnCli
             snackbar.show();
         else
             snackbar.dismiss();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        result = SQLite.select().from(Result.class)
+                .where(Result_Table.id.eq(getIntent().getIntExtra(ID, 0))).querySingle();
+        System.out.println("ThisDebug ResultDetailActivity onNewIntent "+ result);
+    }
+
+    @Override
+    public void onDestroy() {
+        System.out.println("ThisDebug ResultDetailActivity onDestroy");
+        super.onDestroy();
+    }
+
+    @Override
+    public void onPause() {
+        System.out.println("ThisDebug MeasurementDetailActivity onPause");
+        super.onPause();
     }
 
     @Override
